@@ -60,5 +60,4 @@ The app features a clean, intuitive design with the following screens:
 ## Installation and Running
 
 1. **Clone the Repository:**
-   ```bash
-https://github.com/JoshuaKoebke/Gear-Guardian   
+   ```bash https://github.com/JoshuaKoebke/Gear-Guardian   
