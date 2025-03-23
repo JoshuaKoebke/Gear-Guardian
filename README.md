@@ -61,4 +61,13 @@ The app features a clean, intuitive design with the following screens:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/JoshuaKoebke/Gear-Guardian   
+   git clone https://github.com/JoshuaKoebke/Gear-Guardian
+
+
+##Features:##
+Core Features
+-	Log maintenance & repairs
+-	Service history view
+-	Predictive maintenance suggestions
+-	Reminder notification
+
