@@ -64,7 +64,7 @@ The app features a clean, intuitive design with the following screens:
    git clone https://github.com/JoshuaKoebke/Gear-Guardian
 
 
-##Features:##
+## Features:
 Core Features
 -	Log maintenance & repairs
 -	Service history view
