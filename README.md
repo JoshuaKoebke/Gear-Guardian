@@ -14,6 +14,7 @@ Many vehicle owners struggle with keeping track of their maintenance schedules, 
 - Missing critical services and repairs
 - Increased repair costs over time
 - Difficulty in maintaining accurate service records
+- To have a simple reminder to change the oil
 
 This app addresses these issues by providing:
 - An organized system to record maintenance details
@@ -49,14 +50,15 @@ This app addresses these issues by providing:
 ## Design (Wireframes)
 
 The app features a clean, intuitive design with the following screens:
-- **Home Screen:** Overview of upcoming maintenance reminders and recent service logs.
-- **Log Entry Screen:** Form for entering new maintenance records.
-- **History Screen:** List of all recorded maintenance activities.
+- **Home Screen:** To select the vehicle.
+- **Log Entry Screen:** Overview of upcoming maintenance reminders and recent service logs.
+- **Vehicle Entry Screen:** Form for entering new maintenance records.
+- **Add Repair Screen:** To record maintenance activities.
+- **Setting Screen:** To remove all data from the device.
 
-*Wireframe mockups can be attached as images in the repository.*
 
 ## Installation and Running
 
 1. **Clone the Repository:**
    ```bash
-   
+https://github.com/JoshuaKoebke/Gear-Guardian   
