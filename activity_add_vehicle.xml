@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/tvVehicleHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Add Vehicle"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Vehicle Name -->
+    <EditText
+        android:id="@+id/etVehicleName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Vehicle Name"
+        app:layout_constraintTop_toBottomOf="@id/tvVehicleHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Vehicle Make -->
+    <EditText
+        android:id="@+id/etVehicleMake"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Make"
+        app:layout_constraintTop_toBottomOf="@id/etVehicleName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Vehicle Model -->
+    <EditText
+        android:id="@+id/etVehicleModel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Model"
+        app:layout_constraintTop_toBottomOf="@id/etVehicleMake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Vehicle Year -->
+    <EditText
+        android:id="@+id/etVehicleYear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Year"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/etVehicleModel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Service Interval Options -->
+    <TextView
+        android:id="@+id/tvServiceInterval"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Service Interval:"
+        app:layout_constraintTop_toBottomOf="@id/etVehicleYear"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Simple Radio Buttons for Service Interval -->
+    <RadioGroup
+        android:id="@+id/rgServiceInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvServiceInterval"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+        <RadioButton
+            android:id="@+id/rbWeekly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weekly" />
+        <RadioButton
+            android:id="@+id/rbMonthly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monthly" />
+        <RadioButton
+            android:id="@+id/rbQuarterly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 Months" />
+    </RadioGroup>
+
+    <!-- Action Buttons -->
+    <Button
+        android:id="@+id/btnSaveVehicle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Confirm Vehicle"
+        app:layout_constraintTop_toBottomOf="@id/rgServiceInterval"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnCancelVehicle"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"/>
+
+    <Button
+        android:id="@+id/btnCancelVehicle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintTop_toTopOf="@id/btnSaveVehicle"
+        app:layout_constraintStart_toEndOf="@id/btnSaveVehicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
