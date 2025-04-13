@@ -71,3 +71,17 @@ Core Features
 -	Predictive maintenance suggestions
 -	Reminder notification
 
+  
+---
+
+### ✅ Changelog Table
+```markdown
+##  Changelog
+
+| Version | Description  | Status    |
+|---------|--------------------------|
+| 1.0     | Initial release: main menu, add vehicle, basic car log                      |  Previous|
+| 1.1     | UI improvements, SQLite enhancements, fixed vehicle data bug                |  Current |
+| 2.0     | Add predictive suggestions, cloud backup, better reminders                  |  Planned |
+
+
