@@ -6,72 +6,58 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Header -->
+    <!-- Header: App Title -->
+
+    <!-- RecyclerView for Vehicle List -->
     <TextView
-        android:id="@+id/header"
+        android:id="@+id/tvHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="Gear Guardian"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:padding="8dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Upcoming Reminders Section -->
-    <TextView
-        android:id="@+id/upcomingReminders"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Upcoming Maintenance Reminders"
-        android:textSize="18sp"
-        android:paddingTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ListView
-        android:id="@+id/remindersList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVehicleList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/upcomingReminders"
+        app:layout_constraintTop_toBottomOf="@id/tvHeader"
+        app:layout_constraintBottom_toTopOf="@id/btnAddVehicle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/serviceLogs"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
 
-    <!-- Recent Service Logs Section -->
-    <TextView
-        android:id="@+id/serviceLogs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Recent Service Logs"
-        android:textSize="18sp"
-        android:paddingTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/remindersList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Add Vehicle Button -->
 
-    <ListView
-        android:id="@+id/logsList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/serviceLogs"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/addRecordButton"
-        android:layout_marginTop="8dp"/>
+    <!-- Settings Button Anchored at Bottom -->
 
-    <!-- Floating Action Button to Add New Record -->
     <Button
-        android:id="@+id/addRecordButton"
+        android:id="@+id/btnAddVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Record"
+        android:layout_marginTop="352dp"
+        android:text="+ Add Vehicle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvVehicleList" />
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

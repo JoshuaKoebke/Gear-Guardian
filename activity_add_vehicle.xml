@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Header -->
+    <!-- Header: Add Vehicle -->
     <TextView
         android:id="@+id/tvVehicleHeader"
         android:layout_width="0dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Vehicle Name -->
+    <!-- Vehicle Name Field -->
     <EditText
         android:id="@+id/etVehicleName"
         android:layout_width="0dp"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- Vehicle Make -->
+    <!-- Vehicle Make Field -->
     <EditText
         android:id="@+id/etVehicleMake"
         android:layout_width="0dp"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
-    <!-- Vehicle Model -->
+    <!-- Vehicle Model Field -->
     <EditText
         android:id="@+id/etVehicleModel"
         android:layout_width="0dp"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
-    <!-- Vehicle Year -->
+    <!-- Vehicle Year Field -->
     <EditText
         android:id="@+id/etVehicleYear"
         android:layout_width="0dp"
@@ -64,17 +64,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
 
-    <!-- Service Interval Options -->
+    <!-- Service Interval Label -->
     <TextView
         android:id="@+id/tvServiceInterval"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Service Interval:"
+        android:text="Oil check:"
         app:layout_constraintTop_toBottomOf="@id/etVehicleYear"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"/>
 
-    <!-- Simple Radio Buttons for Service Interval -->
+    <!-- Service Interval Options -->
     <RadioGroup
         android:id="@+id/rgServiceInterval"
         android:layout_width="wrap_content"
@@ -100,7 +100,7 @@
             android:text="3 Months" />
     </RadioGroup>
 
-    <!-- Action Buttons -->
+    <!-- Action Buttons: Confirm and Cancel -->
     <Button
         android:id="@+id/btnSaveVehicle"
         android:layout_width="0dp"
