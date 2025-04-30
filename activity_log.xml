@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/carLogRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Vehicle Name Header -->
+    <TextView
+        android:id="@+id/textCarName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Vehicle Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Bold header for selected vehicle :contentReference[oaicite:6]{index=6} -->
+
+    <!-- Oil Check Countdown Label -->
+    <TextView
+        android:id="@+id/labelCountdown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Oil Check Countdown"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@id/textCarName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="4dp"/>
+    <!-- Clarifies the purpose of the timer :contentReference[oaicite:7]{index=7} -->
+
+    <!-- Countdown Timer -->
+    <TextView
+        android:id="@+id/textCountdown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="00:00:00:00"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/labelCountdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonResetCountdown"/>
+    <!-- Dynamic countdown display :contentReference[oaicite:8]{index=8} -->
+
+    <!-- Reset Countdown Button -->
+    <Button
+        android:id="@+id/buttonResetCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        app:layout_constraintTop_toTopOf="@id/textCountdown"
+        app:layout_constraintStart_toEndOf="@id/textCountdown"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- Immediate reset action :contentReference[oaicite:9]{index=9} -->
+
+    <!-- Repairs Section Label -->
+    <TextView
+        android:id="@+id/labelRepairs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repair History"
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@id/textCountdown"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+    <!-- Section divider for repair history :contentReference[oaicite:10]{index=10} -->
+
+    <!-- Horizontal Guideline at 60% -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+    <!-- Splits screen: 60% top, 40% bottom :contentReference[oaicite:11]{index=11} -->
+
+    <!-- Repair History ListView -->
+    <ListView
+        android:id="@+id/listRepairs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/labelRepairs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
+        android:dividerHeight="1dp"/>
+    <!-- Scrollable list of past repairs :contentReference[oaicite:12]{index=12} -->
+
+    <!-- Add Repair Button -->
+    <Button
+        android:id="@+id/buttonAddRepair"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+ Add Repair"
+        app:layout_constraintTop_toBottomOf="@id/listRepairs"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+    <!-- Launches AddRepairActivity :contentReference[oaicite:13]{index=13} -->
+
+    <!-- Suggested Repairs Label -->
+    <TextView
+        android:id="@+id/labelSuggestive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suggested Repairs"
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@id/buttonAddRepair"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"/>
+    <!-- Proactive maintenance suggestions :contentReference[oaicite:14]{index=14} -->
+
+    <!-- Suggested Repairs ListView -->
+    <ListView
+        android:id="@+id/listSuggestiveRepairs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/labelSuggestive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonBack"
+        android:dividerHeight="1dp"/>
+    <!-- Scrollable proactive suggestions :contentReference[oaicite:15]{index=15} -->
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <!-- Returns to main menu :contentReference[oaicite:16]{index=16} -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

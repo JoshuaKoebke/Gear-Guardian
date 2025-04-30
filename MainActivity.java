@@ -1,73 +1,58 @@
 package com.example.gear_guardian;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.database.Cursor;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-    DatabaseHelper dbHelper;
-    ListView logsList;
-    Button addRecordButton;
-    ArrayList<String> logsArray;
-    ArrayAdapter<String> adapter;
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private ListView vehicleList;
+    private Button addVehicleButton;
+    private ArrayList<String> vehicles;
+    private ArrayAdapter<String> vehicleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);  // home screen layout
 
-        dbHelper = new DatabaseHelper(this);
-        logsList = findViewById(R.id.logsList);
-        addRecordButton = findViewById(R.id.addRecordButton);
+        vehicleList       = findViewById(R.id.rvVehicleList);
+        addVehicleButton  = findViewById(R.id.btnAddVehicle);
 
-        logsArray = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, logsArray);
-        logsList.setAdapter(adapter);
+        // Sample data; replace with dbHelper.getAllVehicles() if you have a Vehicle table
+        vehicles = new ArrayList<>();
+        vehicles.add("My Car");
+        vehicles.add("Family Van");
+        vehicles.add("Work Truck");
 
-        // Insert a sample record for demonstration
-        addSampleRecord();
-        loadRecords();
+        vehicleAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                vehicles
+        );
+        vehicleList.setAdapter(vehicleAdapter);
+        vehicleList.setOnItemClickListener(this);
 
-        addRecordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // For demonstration, insert a sample record when button is clicked
-                if (dbHelper.insertRecord("Oil Change", "2025-03-15", 49.99)) {
-                    Toast.makeText(MainActivity.this, "Record added", Toast.LENGTH_SHORT).show();
-                    loadRecords();
-                } else {
-                    Toast.makeText(MainActivity.this, "Error adding record", Toast.LENGTH_SHORT).show();
-                }
-            }
+        addVehicleButton.setOnClickListener(v -> {
+            // Launch your AddVehicleActivity (not shown here)
+            Intent intent = new Intent(MainActivity.this, AddVehicleActivity.class);
+            startActivity(intent);
         });
     }
 
-    // Load all records from the database into the ListView
-    private void loadRecords() {
-        logsArray.clear();
-        Cursor cursor = dbHelper.getAllRecords();
-        if (cursor.getCount() == 0) {
-            logsArray.add("No records found.");
-        } else {
-            while (cursor.moveToNext()) {
-                String record = "Service: " + cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_SERVICE))
-                        + " | Date: " + cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_DATE))
-                        + " | Cost: $" + cursor.getDouble(cursor.getColumnIndex(DatabaseHelper.COLUMN_COST));
-                logsArray.add(record);
-            }
-        }
-        adapter.notifyDataSetChanged();
-        cursor.close();
-    }
-
-    // Add a sample record to the database
-    private void addSampleRecord() {
-        dbHelper.insertRecord("Tire Rotation", "2025-02-10", 29.99);
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String selectedVehicle = vehicles.get(position);
+        // Open CarLogActivity, passing the vehicle name
+        Intent intent = new Intent(this, CarLogActivity.class);
+        intent.putExtra("vehicleName", selectedVehicle);
+        startActivity(intent);
     }
 }

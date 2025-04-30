@@ -7,94 +7,89 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    // Database Info
-    private static final String DATABASE_NAME = "gear_guardian.db";
-    private static final int DATABASE_VERSION = 1;
-
-    // Maintenance Table Info
-    public static final String TABLE_MAINTENANCE = "maintenance";
-    public static final String COLUMN_MAINTENANCE_ID = "id";
-    public static final String COLUMN_SERVICE = "service";
-    public static final String COLUMN_DATE = "date";
-    public static final String COLUMN_COST = "cost";
-
-    // Vehicle Table Info
-    public static final String TABLE_VEHICLE = "vehicle";
-    public static final String COLUMN_VEHICLE_ID = "id";
-    public static final String COLUMN_VEHICLE_NAME = "name";
-    public static final String COLUMN_VEHICLE_MAKE = "make";
-    public static final String COLUMN_VEHICLE_MODEL = "model";
-    public static final String COLUMN_VEHICLE_YEAR = "year";
-    public static final String COLUMN_SERVICE_INTERVAL = "interval";
+    private static final String DATABASE_NAME    = "gear_guardian.db";
+    private static final int    DATABASE_VERSION = 4;  // bump when schema changes
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        // Create Maintenance Table
-        String createMaintenanceTable = "CREATE TABLE " + TABLE_MAINTENANCE + " ("
-                + COLUMN_MAINTENANCE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_SERVICE + " TEXT, "
-                + COLUMN_DATE + " TEXT, "
-                + COLUMN_COST + " REAL)";
-        db.execSQL(createMaintenanceTable);
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        // Enable foreign-key constraints for cascade deletes
+        db.setForeignKeyConstraintsEnabled(true);
+    }
 
-        // Create Vehicle Table
-        String createVehicleTable = "CREATE TABLE " + TABLE_VEHICLE + " ("
-                + COLUMN_VEHICLE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_VEHICLE_NAME + " TEXT, "
-                + COLUMN_VEHICLE_MAKE + " TEXT, "
-                + COLUMN_VEHICLE_MODEL + " TEXT, "
-                + COLUMN_VEHICLE_YEAR + " INTEGER, "
-                + COLUMN_SERVICE_INTERVAL + " TEXT)";
-        db.execSQL(createVehicleTable);
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // 1. Vehicle table
+        db.execSQL(
+                "CREATE TABLE vehicle (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "name TEXT NOT NULL, " +
+                        "make TEXT, " +
+                        "model TEXT, " +
+                        "year INTEGER, " +
+                        "service_interval TEXT)"
+        );
+        // 2. Maintenance table with FK → vehicle.id
+        db.execSQL(
+                "CREATE TABLE maintenance (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "vehicle_id INTEGER NOT NULL, " +
+                        "service TEXT NOT NULL, " +
+                        "FOREIGN KEY(vehicle_id) REFERENCES vehicle(id) ON DELETE CASCADE)"
+        );
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older tables if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MAINTENANCE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_VEHICLE);
+        // Drop both tables and recreate (simple migration strategy)
+        db.execSQL("DROP TABLE IF EXISTS maintenance");
+        db.execSQL("DROP TABLE IF EXISTS vehicle");
         onCreate(db);
     }
 
-    // Insert a new maintenance record
-    public boolean insertRecord(String service, String date, double cost) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_SERVICE, service);
-        values.put(COLUMN_DATE, date);
-        values.put(COLUMN_COST, cost);
-
-        long result = db.insert(TABLE_MAINTENANCE, null, values);
-        return result != -1;
+    /** Inserts a new vehicle into the database. */
+    public boolean insertVehicle(String name, String make,
+                                 String model, int year,
+                                 String serviceInterval) {
+        SQLiteDatabase db = getWritableDatabase();  // opens or creates DB :contentReference[oaicite:0]{index=0}
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("make", make);
+        cv.put("model", model);
+        cv.put("year", year);
+        cv.put("service_interval", serviceInterval);
+        long id = db.insert("vehicle", null, cv);
+        return id != -1;
     }
 
-    // Retrieve all maintenance records
-    public Cursor getAllRecords() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_MAINTENANCE, null);
-    }
-
-    // Insert a new vehicle record
-    public boolean insertVehicle(String name, String make, String model, int year, String serviceInterval) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_VEHICLE_NAME, name);
-        values.put(COLUMN_VEHICLE_MAKE, make);
-        values.put(COLUMN_VEHICLE_MODEL, model);
-        values.put(COLUMN_VEHICLE_YEAR, year);
-        values.put(COLUMN_SERVICE_INTERVAL, serviceInterval);
-
-        long result = db.insert(TABLE_VEHICLE, null, values);
-        return result != -1;
-    }
-
-    // Retrieve all vehicles
+    /** Retrieves all vehicles. */
     public Cursor getAllVehicles() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_VEHICLE, null);
+        return getReadableDatabase().rawQuery(
+                "SELECT id, name, make, model, year, service_interval FROM vehicle",
+                null
+        );
+    }
+
+    /** Inserts a maintenance record tied to a vehicle. */
+    public boolean insertMaintenance(int vehicleId, String service) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("vehicle_id", vehicleId);
+        cv.put("service", service);
+        long id = db.insert("maintenance", null, cv);
+        return id != -1;
+    }
+
+    /** Retrieves all maintenance entries for the given vehicle. */
+    public Cursor getMaintenanceForVehicle(int vehicleId) {
+        return getReadableDatabase().rawQuery(
+                "SELECT id, service FROM maintenance WHERE vehicle_id = ?",
+                new String[]{ String.valueOf(vehicleId) }
+        );
     }
 }
