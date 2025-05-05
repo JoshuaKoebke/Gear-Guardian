@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <!-- Bold header for selected vehicle :contentReference[oaicite:6]{index=6} -->
+    <!-- Bold header for selected vehicle -->
 
     <!-- Oil Check Countdown Label -->
     <TextView
@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingBottom="4dp"/>
-    <!-- Clarifies the purpose of the timer :contentReference[oaicite:7]{index=7} -->
+    <!-- Clarifies the purpose of the timer -->
 
     <!-- Countdown Timer -->
     <TextView
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/labelCountdown"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/buttonResetCountdown"/>
-    <!-- Dynamic countdown display :contentReference[oaicite:8]{index=8} -->
+    <!-- Dynamic countdown display -->
 
     <!-- Reset Countdown Button -->
     <Button
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="@id/textCountdown"
         app:layout_constraintStart_toEndOf="@id/textCountdown"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <!-- Immediate reset action :contentReference[oaicite:9]{index=9} -->
+    <!-- Immediate reset action -->
 
     <!-- Repairs Section Label -->
     <TextView
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@id/textCountdown"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"/>
-    <!-- Section divider for repair history :contentReference[oaicite:10]{index=10} -->
+    <!-- Section divider for repair history -->
 
     <!-- Horizontal Guideline at 60% -->
     <androidx.constraintlayout.widget.Guideline
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6"/>
-    <!-- Splits screen: 60% top, 40% bottom :contentReference[oaicite:11]{index=11} -->
+    <!-- Splits screen: 60% top, 40% bottom -->
 
     <!-- Repair History ListView -->
     <ListView
@@ -88,7 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
         android:dividerHeight="1dp"/>
-    <!-- Scrollable list of past repairs :contentReference[oaicite:12]{index=12} -->
+    <!-- Scrollable list of past repairs -->
 
     <!-- Add Repair Button -->
     <Button
@@ -99,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@id/listRepairs"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
-    <!-- Launches AddRepairActivity :contentReference[oaicite:13]{index=13} -->
+    <!-- Launches AddRepairActivity -->
 
     <!-- Suggested Repairs Label -->
     <TextView
@@ -111,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@id/buttonAddRepair"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="16dp"/>
-    <!-- Proactive maintenance suggestions :contentReference[oaicite:14]{index=14} -->
+    <!-- Proactive maintenance suggestion -->
 
     <!-- Suggested Repairs ListView -->
     <ListView
@@ -123,7 +123,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/buttonBack"
         android:dividerHeight="1dp"/>
-    <!-- Scrollable proactive suggestions :contentReference[oaicite:15]{index=15} -->
+    <!-- Scrollable proactive suggestions -->
 
     <!-- Back Button -->
     <Button
@@ -133,6 +133,6 @@
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <!-- Returns to main menu :contentReference[oaicite:16]{index=16} -->
+    <!-- Returns to main menu -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

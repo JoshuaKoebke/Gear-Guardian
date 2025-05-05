@@ -1,58 +1,85 @@
-package com.example.gear_guardian;
+package com.example.gearguardian;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private ListView vehicleList;
-    private Button addVehicleButton;
+public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView      vehicleList;
+    private Button            addVehicleButton, btnSettings;
     private ArrayList<String> vehicles;
-    private ArrayAdapter<String> vehicleAdapter;
+    private VehicleAdapter    vehicleAdapter;
+    private DatabaseHelper    dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);  // home screen layout
+        setContentView(R.layout.activity_main);
 
-        vehicleList       = findViewById(R.id.rvVehicleList);
-        addVehicleButton  = findViewById(R.id.btnAddVehicle);
+        dbHelper = new DatabaseHelper(this);
 
-        // Sample data; replace with dbHelper.getAllVehicles() if you have a Vehicle table
+        // Find & configure the RecyclerView
+        vehicleList = findViewById(R.id.rvVehicleList);
+        vehicleList.setLayoutManager(new LinearLayoutManager(this));
+
+        // Prepare the adapter with an empty list and attach it
         vehicles = new ArrayList<>();
-        vehicles.add("My Car");
-        vehicles.add("Family Van");
-        vehicles.add("Work Truck");
-
-        vehicleAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                vehicles
+        vehicleAdapter = new VehicleAdapter(
+                vehicles,
+                name -> {
+                    // On item click, open CarLogActivity
+                    Intent i = new Intent(MainActivity.this, CarLogActivity.class);
+                    i.putExtra("vehicleName", name);
+                    startActivity(i);
+                }
         );
         vehicleList.setAdapter(vehicleAdapter);
-        vehicleList.setOnItemClickListener(this);
 
-        addVehicleButton.setOnClickListener(v -> {
-            // Launch your AddVehicleActivity (not shown here)
-            Intent intent = new Intent(MainActivity.this, AddVehicleActivity.class);
-            startActivity(intent);
-        });
+        addVehicleButton = findViewById(R.id.btnAddVehicle);
+        addVehicleButton.setOnClickListener(v ->
+                startActivity(new Intent(this, AddVehicleActivity.class))
+        );
+
+        btnSettings = findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(v ->
+                startActivity(new Intent(this, SettingsActivity.class))
+        );
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String selectedVehicle = vehicles.get(position);
-        // Open CarLogActivity, passing the vehicle name
-        Intent intent = new Intent(this, CarLogActivity.class);
-        intent.putExtra("vehicleName", selectedVehicle);
-        startActivity(intent);
+    protected void onResume() {
+        super.onResume();
+        // Reload from DB whenever this screen comes back into view
+        loadVehiclesFromDatabase();
+        vehicleAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Query all vehicles from SQLite and refresh the RecyclerView.
+     */
+    private void loadVehiclesFromDatabase() {
+        Cursor cursor = dbHelper.getAllVehicles();
+        vehicles.clear();
+
+        if (cursor.moveToFirst()) {
+            int nameCol = cursor.getColumnIndexOrThrow(
+                    DatabaseHelper.COLUMN_VEHICLE_NAME
+            );
+            do {
+                vehicles.add(cursor.getString(nameCol));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        // Tell the adapter to rebind views with the new data
+        vehicleAdapter.notifyDataSetChanged();
     }
 }

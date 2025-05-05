@@ -6,23 +6,20 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Header: App Title -->
-
-    <!-- RecyclerView for Vehicle List -->
+    <!-- Header -->
     <TextView
         android:id="@+id/tvHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:text="Gear Guardian"
+        android:text="Vehicle Log "
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- RecyclerView fills between header and Add button -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvVehicleList"
         android:layout_width="0dp"
@@ -30,22 +27,21 @@
         app:layout_constraintTop_toBottomOf="@id/tvHeader"
         app:layout_constraintBottom_toTopOf="@id/btnAddVehicle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Add Vehicle Button -->
+    <!-- Add Vehicle button directly below RecyclerView -->
 
-    <!-- Settings Button Anchored at Bottom -->
+    <!-- Settings button anchored to bottom -->
 
     <Button
         android:id="@+id/btnAddVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="352dp"
+        android:layout_margin="16dp"
         android:text="+ Add Vehicle"
+        app:layout_constraintBottom_toTopOf="@+id/btnSettings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvVehicleList" />
 
@@ -53,11 +49,8 @@
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
         android:text="Settings"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
